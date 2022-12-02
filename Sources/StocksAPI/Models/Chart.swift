@@ -7,6 +7,38 @@
 
 import Foundation
 
+public struct ChartResponse: Decodable {
+    
+    public let data: [ChartData]?
+    public let error: ErrorResponse?
+    
+    enum CodingKeys: CodingKey {
+        case chart
+    }
+    
+    enum ChartKeys: CodingKey {
+        case result
+        case error
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        if let chartContainer = try? container.nestedContainer(keyedBy: ChartKeys.self, forKey: .chart) {
+            data = try? chartContainer.decodeIfPresent([ChartData].self, forKey: .result)
+            error = try? chartContainer.decodeIfPresent(ErrorResponse.self, forKey: .error)
+        } else {
+            data = nil
+            error = nil
+        }
+    }
+    
+    public init(data: [ChartData]?, error: ErrorResponse?) {
+        self.data = data
+        self.error = error
+    }
+}
+
 public struct ChartData: Decodable {
     
     public let meta: ChartMeta

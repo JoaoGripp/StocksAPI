@@ -19,11 +19,19 @@ struct StocksAPIExec {
 //
 //        print(quoteResponse)
         
-        let (searchData, _) = try! await URLSession.shared.data(from: URL(string: "https://query1.finance.yahoo.com/v1/finance/search?q=Tesla")!)
+//        let (searchData, _) = try! await URLSession.shared.data(from: URL(string: "https://query1.finance.yahoo.com/v1/finance/search?q=Tesla")!)
+//
+//        let searchResponse = try! JSONDecoder().decode(SearchTickerResponse.self, from: searchData)
+//
+//        print(searchResponse)
         
-        let searchResponse = try! JSONDecoder().decode(SearchTickerResponse.self, from: searchData)
+        let (chartData, _) = try! await URLSession.shared.data(from: URL(string: "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?range=1d&interval=1m&includeTimestamp=true&indicators=quote")!)
+       
+        let chartResponse = try! JSONDecoder().decode(ChartResponse.self, from: chartData)
+       
+        print(chartResponse)
         
-        print(searchResponse)
+        
         
         
 //        print(StocksAPI().text)
