@@ -145,8 +145,6 @@ public struct ChartMeta: Decodable {
         self.regularTradingPeriodStartDate = try  regularTradingPeriodContainer?.decodeIfPresent(Date.self, forKey: .start) ?? Date()
         self.regularTradingPeriodEndDate = try regularTradingPeriodContainer?.decodeIfPresent(Date.self, forKey: .end) ?? Date()
         
-        
-        
     }
 }
 

@@ -19,6 +19,9 @@ struct StocksAPIExec {
             let quotes = try await stocksAPI.fetchQuotes(symbols: "AAPL, MSFT,TSLA")
             print(quotes)
             
+            let tickers = try await stocksAPI.searchTickers(query: "tesla")
+            print(tickers)
+            
         } catch {
             print(error.localizedDescription)
         }
