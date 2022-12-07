@@ -11,7 +11,17 @@ import StocksAPI
 @main
 struct StocksAPIExec {
     
+    static let stocksAPI = StocksAPI()
+    
     static func main() async {
+        
+        do {
+            let quotes = try await stocksAPI.fetchQuotes(symbols: "AAPL, MSFT,TSLA")
+            print(quotes)
+            
+        } catch {
+            print(error.localizedDescription)
+        }
         
 //        let (data, _) = try! await URLSession.shared.data(from: URL(string: "https://query1.finance.yahoo.com/v7/finance/quote?symbols=AAPL,MSFT,GOOG,TSLA")!)
 //
@@ -25,11 +35,13 @@ struct StocksAPIExec {
 //
 //        print(searchResponse)
         
-        let (chartData, _) = try! await URLSession.shared.data(from: URL(string: "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?range=1d&interval=1m&includeTimestamp=true&indicators=quote")!)
-       
-        let chartResponse = try! JSONDecoder().decode(ChartResponse.self, from: chartData)
-       
-        print(chartResponse)
+//        let (chartData, _) = try! await URLSession.shared.data(from: URL(string: "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?range=1d&interval=1m&includeTimestamp=true&indicators=quote")!)
+//
+//        let chartResponse = try! JSONDecoder().decode(ChartResponse.self, from: chartData)
+//
+//        print(chartResponse)
+        
+        
         
         
         
